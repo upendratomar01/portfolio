@@ -1,5 +1,10 @@
 pipeline {
     agent any
+    parameters {
+        string(name:"projectName",description:"please enter project name")
+        choice(name:"deployTo",choices:["dev","test","stage","prod"],description:"please enter env name where you want to deeploy your app?")
+        booleanParam(name:"shouldRunTest",description:"Do you want to run tests?")
+    }
     environment {
         CI = "true"
     }
@@ -8,10 +13,18 @@ pipeline {
              steps {
                 // sh './jenkins/scripts/install-deps.sh'
                 // sh 'npm install'
+                echo "Project Name: ${params.projectName}"
+                echo "Deploy To: ${params.deployTo}"
+                echo "Should Run Test: ${params.shouldRunTest}"
                 bat 'npm install'
              }
         }
         stage('Test'){
+            when {
+                expression {
+                    params.shouldRunTest == true
+                }
+            }
             steps {
                 bat 'npm run test'
             }
