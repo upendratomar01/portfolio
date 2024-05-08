@@ -6,17 +6,17 @@ pipeline {
     stages {
         stage('Add Deps') {
              steps {
-                sh './scripts/install-deps.sh'
+                sh './jenkins/scripts/install-deps.sh'
              }
         }
         stage('Test'){
             steps {
-                sh './scripts/test.sh'
+                sh './jenkins/scripts/test.sh'
             }
         }
         stage('Build'){
             steps {
-                sh './scripts/build.sh'
+                sh './jenkins/scripts/build.sh'
             }
         }
     }
