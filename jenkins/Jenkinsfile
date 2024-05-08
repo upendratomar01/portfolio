@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+    environment {
+        CI :"true"
+    }
+    stages {
+        stage('Add Deps') {
+             steps {
+                sh './scripts/install-deps.sh'
+             }
+        }
+        stage('Test'){
+            sh './scripts/test.sh'
+        }
+        stage('Build'){
+            steps {
+                sh './scripts/build.sh'
+            }
+        }
+    }
+}
