@@ -10,7 +10,9 @@ pipeline {
              }
         }
         stage('Test'){
-            sh './scripts/test.sh'
+            steps {
+                sh './scripts/test.sh'
+            }
         }
         stage('Build'){
             steps {
