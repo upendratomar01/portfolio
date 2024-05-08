@@ -6,17 +6,18 @@ pipeline {
     stages {
         stage('Add Deps') {
              steps {
-                sh './jenkins/scripts/install-deps.sh'
+                // sh './jenkins/scripts/install-deps.sh'
+                sh 'npm install'
              }
         }
         stage('Test'){
             steps {
-                sh './jenkins/scripts/test.sh'
+                sh 'npm run test'
             }
         }
         stage('Build'){
             steps {
-                sh './jenkins/scripts/build.sh'
+                sh 'npm run build'
             }
         }
     }
